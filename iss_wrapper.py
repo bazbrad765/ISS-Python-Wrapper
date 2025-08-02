@@ -13,6 +13,7 @@ class ISSListener(SubscriptionListener):
         value = update.getValue("Value")
         #value = round(float(value),2) add a float checker and add this rounder to all floats
         self.data[item] = value
+        #print(self.data)
 
 class ISS:
     """a wrapper to get the live nodes from the ISS lightstreamer"""
@@ -411,7 +412,7 @@ class ISS:
         self._connected = True
 
 
-    def _get_value(self, name: str) -> Optional[str]:
+    def _get_value(self, name: str):
         if name in self._iss_telemetry_nodes:
             return self._data.get(self._iss_telemetry_nodes[name])
         else:
@@ -421,21 +422,26 @@ class ISS:
 
     def get_node(self,name:str):
         return self._get_value(name)
+    
+    
         
     @property
     def waste_water_tank(self) -> Optional[float]:
         """Waste Water Tank Quantity"""
-        return self._get_value("waste_water_tank_qty")
-    
+        val = self._get_value("waste_water_tank_qty")
+        return None if val is None else float(val)
+
     @property
     def gmt_time(self) -> Optional[str]:
         """Greenwich Mean Time"""
-        return self._get_value("gmt_time")
-    
+        val = self._get_value("gmt_time")
+        return None if val is None else str(val)
+
     @property
     def cabin_pressure(self) -> Optional[str]:
         """Cabin Atmospheric Pressure"""
-        return self._get_value("cabin_pressure")
+        val = self._get_value("cabin_pressure")
+        return None if val is None else str(val)
     
     @property
     def hi_p_o2_valve_position(self) -> Optional[str]:
@@ -476,33 +482,40 @@ class ISS:
     @property
     def cmgs_online_count(self) -> Optional[int]:
         """Control Moment Gyroscopes Online Count"""
-        return self._get_value("cmgs_online_count")
+        val = self._get_value("cmgs_online_count")
+        return None if val is None else int(val)
     
     @property
     def cmg_control_torque_roll(self) -> Optional[float]:
         """Control Moment Gyroscope Control Torque Roll"""
-        return self._get_value("cmg_control_torque_roll")
+        val = self._get_value("cmg_control_torque_roll")
+        return None if val is None else float(val)
     
     @property
     def cmg_control_torque_pitch(self) -> Optional[float]:
         """Control Moment Gyroscope Control Torque Pitch"""
-        return self._get_value("cmg_control_torque_pitch")
+        val = self._get_value("cmg_control_torque_pitch")
+        return None if val == None else float(val)
     
     @property
     def cmg_control_torque_yaw(self) -> Optional[float]:
         """Control Moment Gyroscope Control Torque Yaw"""
-        return self._get_value("cmg_control_torque_yaw")
+        val = (self._get_value("cmg_control_torque_yaw"))
+        return None if val == None else float(val)
+
     
     @property
     def cmg_active_momentum(self) -> Optional[float]:
         """Control Moment Gyroscope Active Momentum"""
-        return self._get_value("cmg_active_momentum")
-    
+        val = self._get_value("cmg_active_momentum")
+        return None if val is None else float(val)
+
     @property
     def cmg_momentum_percentage(self) -> Optional[float]:
         """Control Moment Gyroscope Momentum Percentage"""
-        return self._get_value("cmg_momentum_percentage")
-    
+        val = self._get_value("cmg_momentum_percentage")
+        return None if val is None else float(val)
+        
     @property
     def desaturation_request(self) -> Optional[str]:
         """CMG Desaturation Request Status"""
@@ -513,7 +526,8 @@ class ISS:
     @property
     def gnc_mode(self) -> Optional[str]:
         """Guidance Navigation and Control Mode"""
-        return self._get_value("gnc_mode")
+        val = self._get_value("gnc_mode")
+        return None if val is None else str(val)
     
     @property
     def attitude_source(self) -> Optional[str]:
@@ -557,104 +571,122 @@ class ISS:
     @property
     def lvlh_quaternion_0(self) -> Optional[float]:
         """Local Vertical Local Horizontal Quaternion 0"""
-        return self._get_value("lvlh_quaternion_0")
-    
+        val = self._get_value("lvlh_quaternion_0")
+        return None if val is None else float(val)
+
     @property
     def lvlh_quaternion_1(self) -> Optional[float]:
         """Local Vertical Local Horizontal Quaternion 1"""
-        return self._get_value("lvlh_quaternion_1")
-    
+        val = self._get_value("lvlh_quaternion_1")
+        return None if val is None else float(val)
+
     @property
     def lvlh_quaternion_2(self) -> Optional[float]:
         """Local Vertical Local Horizontal Quaternion 2"""
-        return self._get_value("lvlh_quaternion_2")
-    
+        val = self._get_value("lvlh_quaternion_2")
+        return None if val is None else float(val)
+
     @property
     def lvlh_quaternion_3(self) -> Optional[float]:
         """Local Vertical Local Horizontal Quaternion 3"""
-        return self._get_value("lvlh_quaternion_3")
-    
+        val = self._get_value("lvlh_quaternion_3")
+        return None if val is None else float(val)
+
     @property
     def attitude_roll_error(self) -> Optional[float]:
         """Attitude Roll Error (degrees)"""
-        return self._get_value("attitude_roll_error")
-    
+        val = self._get_value("attitude_roll_error")
+        return None if val is None else float(val)
+
     @property
     def attitude_pitch_error(self) -> Optional[float]:
         """Attitude Pitch Error (degrees)"""
-        return self._get_value("attitude_pitch_error")
-    
+        val = self._get_value("attitude_pitch_error")
+        return None if val is None else float(val)
+
     @property
     def attitude_yaw_error(self) -> Optional[float]:
         """Attitude Yaw Error (degrees)"""
-        return self._get_value("attitude_yaw_error")
-    
+        val = self._get_value("attitude_yaw_error")
+        return None if val is None else float(val)
+
     @property
     def commanded_quaternion_0(self) -> Optional[float]:
         """Commanded Attitude Quaternion 0"""
-        return self._get_value("commanded_quaternion_0")
-    
+        val = self._get_value("commanded_quaternion_0")
+        return None if val is None else float(val)
+
     @property
     def commanded_quaternion_1(self) -> Optional[float]:
         """Commanded Attitude Quaternion 1"""
-        return self._get_value("commanded_quaternion_1")
-    
+        val = self._get_value("commanded_quaternion_1")
+        return None if val is None else float(val)
+
     @property
     def commanded_quaternion_2(self) -> Optional[float]:
         """Commanded Attitude Quaternion 2"""
-        return self._get_value("commanded_quaternion_2")
-    
+        val = self._get_value("commanded_quaternion_2")
+        return None if val is None else float(val)
+
     @property
     def commanded_quaternion_3(self) -> Optional[float]:
         """Commanded Attitude Quaternion 3"""
-        return self._get_value("commanded_quaternion_3")
-    
+        val = self._get_value("commanded_quaternion_3")
+        return None if val is None else float(val)
 
     @property
     def state_vector_x_pos(self) -> Optional[float]:
         """State Vector X Position (meters)"""
-        return self._get_value("state_vector_x_pos")
-    
+        val = self._get_value("state_vector_x_pos")
+        return None if val is None else float(val)
+
     @property
     def state_vector_y_pos(self) -> Optional[float]:
         """State Vector Y Position (meters)"""
-        return self._get_value("state_vector_y_pos")
-    
+        val = self._get_value("state_vector_y_pos")
+        return None if val is None else float(val)
+
     @property
     def state_vector_z_pos(self) -> Optional[float]:
         """State Vector Z Position (meters)"""
-        return self._get_value("state_vector_z_pos")
-    
+        val = self._get_value("state_vector_z_pos")
+        return None if val is None else float(val)
+
     @property
     def state_vector_x_vel(self) -> Optional[float]:
         """State Vector X Velocity (m/s)"""
-        return self._get_value("state_vector_x_vel")
-    
+        val = self._get_value("state_vector_x_vel")
+        return None if val is None else float(val)
+
     @property
     def state_vector_y_vel(self) -> Optional[float]:
         """State Vector Y Velocity (m/s)"""
-        return self._get_value("state_vector_y_vel")
-    
+        val = self._get_value("state_vector_y_vel")
+        return None if val is None else float(val)
+
     @property
     def state_vector_z_vel(self) -> Optional[float]:
         """State Vector Z Velocity (m/s)"""
-        return self._get_value("state_vector_z_vel")
-    
+        val = self._get_value("state_vector_z_vel")
+        return None if val is None else float(val)
 
     @property
     def cmg_capacity(self) -> Optional[float]:
         """Control Moment Gyroscope Capacity"""
-        return self._get_value("cmg_capacity")
-    
+        val = self._get_value("cmg_capacity")
+        return None if val is None else float(val)
+
     @property
     def iss_total_mass(self) -> Optional[float]:
         """International Space Station Total Mass (kg)"""
-        return self._get_value("iss_total_mass")
-    
+        val = self._get_value("iss_total_mass")
+        return None if val is None else float(val)
+
     @property
     def solar_beta_angle(self) -> Optional[float]:
         """Solar Beta Angle (degrees)"""
-        return self._get_value("solar_beta_angle")
+        val = self._get_value("solar_beta_angle")
+        return None if val is None else float(val)
     
     @property
     def loac_cmg_alarm(self) -> Optional[str]:
@@ -700,83 +732,98 @@ class ISS:
     @property
     def cmg_1_spin_motor_temp(self) -> Optional[float]:
         """Control Moment Gyroscope 1 Spin Motor Temperature"""
-        return self._get_value("cmg_1_spin_motor_temp")
-    
+        val = self._get_value("cmg_1_spin_motor_temp")
+        return None if val is None else float(val)
+
     @property
     def cmg_2_spin_motor_temp(self) -> Optional[float]:
         """Control Moment Gyroscope 2 Spin Motor Temperature"""
-        return self._get_value("cmg_2_spin_motor_temp")
-    
+        val = self._get_value("cmg_2_spin_motor_temp")
+        return None if val is None else float(val)
+
     @property
     def cmg_3_spin_motor_temp(self) -> Optional[float]:
         """Control Moment Gyroscope 3 Spin Motor Temperature"""
-        return self._get_value("cmg_3_spin_motor_temp")
-    
+        val = self._get_value("cmg_3_spin_motor_temp")
+        return None if val is None else float(val)
+
     @property
     def cmg_4_spin_motor_temp(self) -> Optional[float]:
         """Control Moment Gyroscope 4 Spin Motor Temperature"""
-        return self._get_value("cmg_4_spin_motor_temp")
-    
+        val = self._get_value("cmg_4_spin_motor_temp")
+        return None if val is None else float(val)
+
     @property
     def cmg_1_hall_resolver_temp(self) -> Optional[float]:
         """Control Moment Gyroscope 1 Hall Resolver Temperature"""
-        return self._get_value("cmg_1_hall_resolver_temp")
-    
+        val = self._get_value("cmg_1_hall_resolver_temp")
+        return None if val is None else float(val)
+
     @property
     def cmg_2_hall_resolver_temp(self) -> Optional[float]:
         """Control Moment Gyroscope 2 Hall Resolver Temperature"""
-        return self._get_value("cmg_2_hall_resolver_temp")
-    
+        val = self._get_value("cmg_2_hall_resolver_temp")
+        return None if val is None else float(val)
+
     @property
     def cmg_3_hall_resolver_temp(self) -> Optional[float]:
         """Control Moment Gyroscope 3 Hall Resolver Temperature"""
-        return self._get_value("cmg_3_hall_resolver_temp")
-    
+        val = self._get_value("cmg_3_hall_resolver_temp")
+        return None if val is None else float(val)
+
     @property
     def cmg_4_hall_resolver_temp(self) -> Optional[float]:
         """Control Moment Gyroscope 4 Hall Resolver Temperature"""
-        return self._get_value("cmg_4_hall_resolver_temp")
-    
+        val = self._get_value("cmg_4_hall_resolver_temp")
+        return None if val is None else float(val)
 
     @property
     def lab_ppo2(self) -> Optional[float]:
         """Lab Partial Pressure Oxygen"""
-        return self._get_value("lab_ppo2")
-    
+        val = self._get_value("lab_ppo2")
+        return None if val is None else float(val)
+
     @property
     def lab_ppn2(self) -> Optional[float]:
         """Lab Partial Pressure Nitrogen"""
-        return self._get_value("lab_ppn2")
-    
+        val = self._get_value("lab_ppn2")
+        return None if val is None else float(val)
+
     @property
     def lab_ppco2(self) -> Optional[float]:
         """Lab Partial Pressure Carbon Dioxide"""
-        return self._get_value("lab_ppco2")
-    
+        val = self._get_value("lab_ppco2")
+        return None if val is None else float(val)
+
     @property
     def lab_coolant_lt(self) -> Optional[float]:
         """Lab Coolant Loop Temperature (Low)"""
-        return self._get_value("lab_coolant_lt")
-    
+        val = self._get_value("lab_coolant_lt")
+        return None if val is None else float(val)
+
     @property
     def lab_coolant_mt(self) -> Optional[float]:
         """Lab Coolant Loop Temperature (Medium)"""
-        return self._get_value("lab_coolant_mt")
-    
+        val = self._get_value("lab_coolant_mt")
+        return None if val is None else float(val)
+
     @property
     def cabin_temperature(self) -> Optional[float]:
         """Cabin Temperature"""
-        return self._get_value("cabin_temperature")
-    
+        val = self._get_value("cabin_temperature")
+        return None if val is None else float(val)
+
     @property
     def lab_avionics_temp(self) -> Optional[float]:
         """Lab Avionics Temperature"""
-        return self._get_value("lab_avionics_temp")
-    
+        val = self._get_value("lab_avionics_temp")
+        return None if val is None else float(val)
+
     @property
     def lab_air_cooling_temp(self) -> Optional[float]:
         """Lab Air Cooling Temperature"""
-        return self._get_value("lab_air_cooling_temp")
+        val = self._get_value("lab_air_cooling_temp")
+        return None if val is None else float(val)
     
     @property
     def vacuum_resource_valve(self) -> Optional[str]:
@@ -916,37 +963,44 @@ class ISS:
     @property
     def attitude_maneuver_in_progress(self) -> Optional[bool]:
         """Attitude Maneuver In Progress Status"""
-        return self._get_value("attitude_maneuver_in_progress")
-    
+        val = self._get_value("attitude_maneuver_in_progress")
+        return None if val is None else bool(val)
+
     @property
     def standard_command_counter(self) -> Optional[int]:
         """Standard Command Counter"""
-        return self._get_value("standard_command_counter")
-    
+        val = self._get_value("standard_command_counter")
+        return None if val is None else int(val)
+
     @property
     def data_load_command_counter(self) -> Optional[int]:
         """Data Load Command Counter"""
-        return self._get_value("data_load_command_counter")
-    
+        val = self._get_value("data_load_command_counter")
+        return None if val is None else int(val)
+
     @property
     def cc_mdm_time_coarse(self) -> Optional[int]:
         """Command and Control MDM Time Coarse"""
-        return self._get_value("cc_mdm_time_coarse")
-    
+        val = self._get_value("cc_mdm_time_coarse")
+        return None if val is None else int(val)
+
     @property
     def cc_mdm_time_fine(self) -> Optional[int]:
         """Command and Control MDM Time Fine"""
-        return self._get_value("cc_mdm_time_fine")
-    
+        val = self._get_value("cc_mdm_time_fine")
+        return None if val is None else int(val)
+
     @property
     def station_mode(self) -> Optional[str]:
         """Space Station Operating Mode"""
-        return self._get_value("station_mode")
-    
+        val = self._get_value("station_mode")
+        return None if val is None else str(val)
+
     @property
     def laptops_active(self) -> Optional[int]:
         """Number of Active Laptops"""
-        return self._get_value("laptops_active")
+        val = self._get_value("laptops_active")
+        return None if val is None else int(val)
     
 
     @property
@@ -1111,62 +1165,74 @@ class ISS:
     @property
     def cmg_1_vibration(self) -> Optional[float]:
         """Control Moment Gyroscope 1 Vibration Level"""
-        return self._get_value("cmg_1_vibration")
-    
+        val = self._get_value("cmg_1_vibration")
+        return None if val is None else float(val)
+
     @property
     def cmg_2_vibration(self) -> Optional[float]:
         """Control Moment Gyroscope 2 Vibration Level"""
-        return self._get_value("cmg_2_vibration")
-    
+        val = self._get_value("cmg_2_vibration")
+        return None if val is None else float(val)
+
     @property
     def cmg_3_vibration(self) -> Optional[float]:
         """Control Moment Gyroscope 3 Vibration Level"""
-        return self._get_value("cmg_3_vibration")
-    
+        val = self._get_value("cmg_3_vibration")
+        return None if val is None else float(val)
+
     @property
     def cmg_4_vibration(self) -> Optional[float]:
         """Control Moment Gyroscope 4 Vibration Level"""
-        return self._get_value("cmg_4_vibration")
-    
+        val = self._get_value("cmg_4_vibration")
+        return None if val is None else float(val)
+
     @property
     def cmg_1_spin_motor_current(self) -> Optional[float]:
         """Control Moment Gyroscope 1 Spin Motor Current"""
-        return self._get_value("cmg_1_spin_motor_current")
-    
+        val = self._get_value("cmg_1_spin_motor_current")
+        return None if val is None else float(val)
+
     @property
     def cmg_2_spin_motor_current(self) -> Optional[float]:
         """Control Moment Gyroscope 2 Spin Motor Current"""
-        return self._get_value("cmg_2_spin_motor_current")
-    
+        val = self._get_value("cmg_2_spin_motor_current")
+        return None if val is None else float(val)
+
     @property
     def cmg_3_spin_motor_current(self) -> Optional[float]:
         """Control Moment Gyroscope 3 Spin Motor Current"""
-        return self._get_value("cmg_3_spin_motor_current")
-    
+        val = self._get_value("cmg_3_spin_motor_current")
+        return None if val is None else float(val)
+
     @property
     def cmg_4_spin_motor_current(self) -> Optional[float]:
         """Control Moment Gyroscope 4 Spin Motor Current"""
-        return self._get_value("cmg_4_spin_motor_current")
-    
+        val = self._get_value("cmg_4_spin_motor_current")
+        return None if val is None else float(val)
+
     @property
     def cmg_1_wheel_speed(self) -> Optional[float]:
         """Control Moment Gyroscope 1 Wheel Speed"""
-        return self._get_value("cmg_1_wheel_speed")
-    
+        val = self._get_value("cmg_1_wheel_speed")
+        return None if val is None else float(val)
+
     @property
     def cmg_2_wheel_speed(self) -> Optional[float]:
         """Control Moment Gyroscope 2 Wheel Speed"""
-        return self._get_value("cmg_2_wheel_speed")
-    
+        val = self._get_value("cmg_2_wheel_speed")
+        return None if val is None else float(val)
+
     @property
     def cmg_3_wheel_speed(self) -> Optional[float]:
         """Control Moment Gyroscope 3 Wheel Speed"""
-        return self._get_value("cmg_3_wheel_speed")
-    
+        val = self._get_value("cmg_3_wheel_speed")
+        return None if val is None else float(val)
+
     @property
     def cmg_4_wheel_speed(self) -> Optional[float]:
         """Control Moment Gyroscope 4 Wheel Speed"""
-        return self._get_value("cmg_4_wheel_speed")
+        val = self._get_value("cmg_4_wheel_speed")
+        return None if val is None else float(val)
     
     @property
     def ku_transmit(self) -> Optional[str]:
@@ -1178,12 +1244,14 @@ class ISS:
     @property
     def ku_sgant_elevation(self) -> Optional[float]:
         """Ku-band Space-to-Ground Antenna Elevation"""
-        return self._get_value("ku_sgant_elevation")
-    
+        val = self._get_value("ku_sgant_elevation")
+        return None if val is None else float(val)
+
     @property
     def ku_sgant_cross_elevation(self) -> Optional[float]:
         """Ku-band Space-to-Ground Antenna Cross Elevation"""
-        return self._get_value("ku_sgant_cross_elevation")
+        val = self._get_value("ku_sgant_cross_elevation")
+        return None if val is None else float(val)
     
 
     @property
@@ -1409,12 +1477,14 @@ class ISS:
     @property
     def sband_rfg2_azimuth(self) -> Optional[float]:
         """S-band Radio Frequency Group 2 Azimuth"""
-        return self._get_value("sband_rfg2_azimuth")
-    
+        val = self._get_value("sband_rfg2_azimuth")
+        return None if val is None else float(val)
+
     @property
     def sband_rfg2_elevation(self) -> Optional[float]:
         """S-band Radio Frequency Group 2 Elevation"""
-        return self._get_value("sband_rfg2_elevation")
+        val = self._get_value("sband_rfg2_elevation")
+        return None if val is None else float(val)
     
     @property
     def sband_rfg2_status(self) -> Optional[str]:
@@ -1426,12 +1496,14 @@ class ISS:
     @property
     def sband_rfg1_azimuth(self) -> Optional[float]:
         """S-band Radio Frequency Group 1 Azimuth"""
-        return self._get_value("sband_rfg1_azimuth")
-    
+        val = self._get_value("sband_rfg1_azimuth")
+        return None if val is None else float(val)
+
     @property
     def sband_rfg1_elevation(self) -> Optional[float]:
         """S-band Radio Frequency Group 1 Elevation"""
-        return self._get_value("sband_rfg1_elevation")
+        val = self._get_value("sband_rfg1_elevation")
+        return None if val is None else float(val)
     
     @property
     def sband_rfg1_status(self) -> Optional[str]:
@@ -1444,209 +1516,248 @@ class ISS:
     @property
     def loop_b_pump_flowrate(self) -> Optional[float]:
         """Thermal Control Loop B Pump Flow Rate"""
-        return self._get_value("loop_b_pump_flowrate")
-    
+        val = self._get_value("loop_b_pump_flowrate")
+        return None if val is None else float(val)
+
     @property
     def loop_b_pm_pressure(self) -> Optional[float]:
         """Thermal Control Loop B Pump Module Pressure"""
-        return self._get_value("loop_b_pm_pressure")
-    
+        val = self._get_value("loop_b_pm_pressure")
+        return None if val is None else float(val)
+
     @property
     def loop_b_pm_temp(self) -> Optional[float]:
         """Thermal Control Loop B Pump Module Temperature"""
-        return self._get_value("loop_b_pm_temp")
-    
+        val = self._get_value("loop_b_pm_temp")
+        return None if val is None else float(val)
+
     @property
     def loop_a_pump_flowrate(self) -> Optional[float]:
         """Thermal Control Loop A Pump Flow Rate"""
-        return self._get_value("loop_a_pump_flowrate")
-    
+        val = self._get_value("loop_a_pump_flowrate")
+        return None if val is None else float(val)
+
     @property
     def loop_a_pm_pressure(self) -> Optional[float]:
         """Thermal Control Loop A Pump Module Pressure"""
-        return self._get_value("loop_a_pm_pressure")
-    
+        val = self._get_value("loop_a_pm_pressure")
+        return None if val is None else float(val)
+
     @property
     def loop_a_pm_temp(self) -> Optional[float]:
         """Thermal Control Loop A Pump Module Temperature"""
-        return self._get_value("loop_a_pm_temp")
-    
+        val = self._get_value("loop_a_pm_temp")
+        return None if val is None else float(val)
+
     @property
     def solar_2a_drive_voltage(self) -> Optional[float]:
         """Solar Array 2A Drive Voltage"""
-        return self._get_value("solar_2a_drive_voltage")
-    
+        val = self._get_value("solar_2a_drive_voltage")
+        return None if val is None else float(val)
+
     @property
     def solar_2a_drive_current(self) -> Optional[float]:
         """Solar Array 2A Drive Current"""
-        return self._get_value("solar_2a_drive_current")
-    
+        val = self._get_value("solar_2a_drive_current")
+        return None if val is None else float(val)
+
     @property
     def solar_4a_drive_voltage(self) -> Optional[float]:
         """Solar Array 4A Drive Voltage"""
-        return self._get_value("solar_4a_drive_voltage")
-    
+        val = self._get_value("solar_4a_drive_voltage")
+        return None if val is None else float(val)
+
     @property
     def solar_4a_drive_current(self) -> Optional[float]:
         """Solar Array 4A Drive Current"""
-        return self._get_value("solar_4a_drive_current")
-    
+        val = self._get_value("solar_4a_drive_current")
+        return None if val is None else float(val)
+
     @property
     def solar_2a_bga_position(self) -> Optional[float]:
         """Solar Array 2A Beta Gimbal Assembly Position"""
-        return self._get_value("solar_2a_bga_position")
-    
+        val = self._get_value("solar_2a_bga_position")
+        return None if val is None else float(val)
+
     @property
     def solar_4a_bga_position(self) -> Optional[float]:
         """Solar Array 4A Beta Gimbal Assembly Position"""
-        return self._get_value("solar_4a_bga_position")
-    
+        val = self._get_value("solar_4a_bga_position")
+        return None if val is None else float(val)
+
     @property
     def solar_4b_drive_voltage(self) -> Optional[float]:
         """Solar Array 4B Drive Voltage"""
-        return self._get_value("solar_4b_drive_voltage")
-    
+        val = self._get_value("solar_4b_drive_voltage")
+        return None if val is None else float(val)
+
     @property
     def solar_4b_drive_current(self) -> Optional[float]:
         """Solar Array 4B Drive Current"""
-        return self._get_value("solar_4b_drive_current")
-    
+        val = self._get_value("solar_4b_drive_current")
+        return None if val is None else float(val)
+
     @property
     def solar_2b_drive_voltage(self) -> Optional[float]:
         """Solar Array 2B Drive Voltage"""
-        return self._get_value("solar_2b_drive_voltage")
-    
+        val = self._get_value("solar_2b_drive_voltage")
+        return None if val is None else float(val)
+
     @property
     def solar_2b_drive_current(self) -> Optional[float]:
         """Solar Array 2B Drive Current"""
-        return self._get_value("solar_2b_drive_current")
-    
+        val = self._get_value("solar_2b_drive_current")
+        return None if val is None else float(val)
+
     @property
     def solar_4b_bga_position(self) -> Optional[float]:
         """Solar Array 4B Beta Gimbal Assembly Position"""
-        return self._get_value("solar_4b_bga_position")
-    
+        val = self._get_value("solar_4b_bga_position")
+        return None if val is None else float(val)
+
     @property
     def solar_2b_bga_position(self) -> Optional[float]:
         """Solar Array 2B Beta Gimbal Assembly Position"""
-        return self._get_value("solar_2b_bga_position")
-    
+        val = self._get_value("solar_2b_bga_position")
+        return None if val is None else float(val)
+
     @property
     def solar_1a_drive_voltage(self) -> Optional[float]:
         """Solar Array 1A Drive Voltage"""
-        return self._get_value("solar_1a_drive_voltage")
-    
+        val = self._get_value("solar_1a_drive_voltage")
+        return None if val is None else float(val)
+
     @property
     def solar_1a_drive_current(self) -> Optional[float]:
         """Solar Array 1A Drive Current"""
-        return self._get_value("solar_1a_drive_current")
-    
+        val = self._get_value("solar_1a_drive_current")
+        return None if val is None else float(val)
+
     @property
     def solar_3a_drive_voltage(self) -> Optional[float]:
         """Solar Array 3A Drive Voltage"""
-        return self._get_value("solar_3a_drive_voltage")
-    
+        val = self._get_value("solar_3a_drive_voltage")
+        return None if val is None else float(val)
+
     @property
     def solar_3a_drive_current(self) -> Optional[float]:
         """Solar Array 3A Drive Current"""
-        return self._get_value("solar_3a_drive_current")
-    
+        val = self._get_value("solar_3a_drive_current")
+        return None if val is None else float(val)
+
     @property
     def solar_1a_bga_position(self) -> Optional[float]:
         """Solar Array 1A Beta Gimbal Assembly Position"""
-        return self._get_value("solar_1a_bga_position")
-    
+        val = self._get_value("solar_1a_bga_position")
+        return None if val is None else float(val)
+
     @property
     def solar_3a_bga_position(self) -> Optional[float]:
         """Solar Array 3A Beta Gimbal Assembly Position"""
-        return self._get_value("solar_3a_bga_position")
-    
+        val = self._get_value("solar_3a_bga_position")
+        return None if val is None else float(val)
+
     @property
     def solar_3b_drive_voltage(self) -> Optional[float]:
         """Solar Array 3B Drive Voltage"""
-        return self._get_value("solar_3b_drive_voltage")
-    
+        val = self._get_value("solar_3b_drive_voltage")
+        return None if val is None else float(val)
+
     @property
     def solar_3b_drive_current(self) -> Optional[float]:
         """Solar Array 3B Drive Current"""
-        return self._get_value("solar_3b_drive_current")
-    
+        val = self._get_value("solar_3b_drive_current")
+        return None if val is None else float(val)
+
     @property
     def solar_1b_drive_voltage(self) -> Optional[float]:
         """Solar Array 1B Drive Voltage"""
-        return self._get_value("solar_1b_drive_voltage")
-    
+        val = self._get_value("solar_1b_drive_voltage")
+        return None if val is None else float(val)
+
     @property
     def solar_1b_drive_current(self) -> Optional[float]:
         """Solar Array 1B Drive Current"""
-        return self._get_value("solar_1b_drive_current")
-    
+        val = self._get_value("solar_1b_drive_current")
+        return None if val is None else float(val)
+
     @property
     def solar_3b_bga_position(self) -> Optional[float]:
         """Solar Array 3B Beta Gimbal Assembly Position"""
-        return self._get_value("solar_3b_bga_position")
-    
+        val = self._get_value("solar_3b_bga_position")
+        return None if val is None else float(val)
+
     @property
     def solar_1b_bga_position(self) -> Optional[float]:
         """Solar Array 1B Beta Gimbal Assembly Position"""
-        return self._get_value("solar_1b_bga_position")
-    
+        val = self._get_value("solar_1b_bga_position")
+        return None if val is None else float(val)
 
     @property
     def starboard_trrj_position(self) -> Optional[float]:
         """Starboard Thermal Radiator Rotary Joint Position"""
-        return self._get_value("starboard_trrj_position")
-    
+        val = self._get_value("starboard_trrj_position")
+        return None if val is None else float(val)
+
     @property
     def port_trrj_position(self) -> Optional[float]:
         """Port Thermal Radiator Rotary Joint Position"""
-        return self._get_value("port_trrj_position")
-    
+        val = self._get_value("port_trrj_position")
+        return None if val is None else float(val)
+
     @property
     def starboard_sarj_position(self) -> Optional[float]:
         """Starboard Solar Alpha Rotary Joint Position"""
-        return self._get_value("starboard_sarj_position")
-    
+        val = self._get_value("starboard_sarj_position")
+        return None if val is None else float(val)
+
     @property
     def port_sarj_position(self) -> Optional[float]:
         """Port Solar Alpha Rotary Joint Position"""
-        return self._get_value("port_sarj_position")
-    
+        val = self._get_value("port_sarj_position")
+        return None if val is None else float(val)
+
     @property
     def port_sarj_commanded_position(self) -> Optional[float]:
         """Port Solar Alpha Rotary Joint Commanded Position"""
-        return self._get_value("port_sarj_commanded_position")
-    
+        val = self._get_value("port_sarj_commanded_position")
+        return None if val is None else float(val)
+
     @property
     def trrj_loop_b_mode(self) -> Optional[str]:
         """Thermal Radiator Rotary Joint Loop B Mode"""
-        return self._get_value("trrj_loop_b_mode")
-    
+        val = self._get_value("trrj_loop_b_mode")
+        return None if val is None else str(val)
+
     @property
     def trrj_loop_a_mode(self) -> Optional[str]:
         """Thermal Radiator Rotary Joint Loop A Mode"""
-        return self._get_value("trrj_loop_a_mode")
-    
+        val = self._get_value("trrj_loop_a_mode")
+        return None if val is None else str(val)
+
     @property
     def sarj_port_mode(self) -> Optional[str]:
         """Solar Alpha Rotary Joint Port Mode"""
-        return self._get_value("sarj_port_mode")
-    
+        val = self._get_value("sarj_port_mode")
+        return None if val is None else str(val)
+
     @property
     def sarj_starboard_mode(self) -> Optional[str]:
         """Solar Alpha Rotary Joint Starboard Mode"""
-        return self._get_value("sarj_starboard_mode")
-    
+        val = self._get_value("sarj_starboard_mode")
+        return None if val is None else str(val)
 
     @property
     def node2_coolant_mt(self) -> Optional[float]:
         """Node 2 Coolant Medium Temperature"""
-        return self._get_value("node2_coolant_mt")
-    
+        val = self._get_value("node2_coolant_mt")
+        return None if val is None else float(val)
+
     @property
     def node2_coolant_lt(self) -> Optional[float]:
         """Node 2 Coolant Low Temperature"""
-        return self._get_value("node2_coolant_lt")
+        val = self._get_value("node2_coolant_lt")
+        return None if val is None else float(val)
     
     @property
     def node2_ac_state(self) -> Optional[str]:
@@ -1658,27 +1769,32 @@ class ISS:
     @property
     def node2_air_cooling_temp(self) -> Optional[float]:
         """Node 2 Air Cooling Temperature"""
-        return self._get_value("node2_air_cooling_temp")
-    
+        val = self._get_value("node2_air_cooling_temp")
+        return None if val is None else float(val)
+
     @property
     def node2_avionics_temp(self) -> Optional[float]:
         """Node 2 Avionics Temperature"""
-        return self._get_value("node2_avionics_temp")
-    
+        val = self._get_value("node2_avionics_temp")
+        return None if val is None else float(val)
+
     @property
     def node3_ppo2(self) -> Optional[float]:
         """Node 3 Partial Pressure Oxygen"""
-        return self._get_value("node3_ppo2")
-    
+        val = self._get_value("node3_ppo2")
+        return None if val is None else float(val)
+
     @property
     def node3_ppn2(self) -> Optional[float]:
         """Node 3 Partial Pressure Nitrogen"""
-        return self._get_value("node3_ppn2")
-    
+        val = self._get_value("node3_ppn2")
+        return None if val is None else float(val)
+
     @property
     def node3_ppco2(self) -> Optional[float]:
         """Node 3 Partial Pressure Carbon Dioxide"""
-        return self._get_value("node3_ppco2")
+        val = self._get_value("node3_ppco2")
+        return None if val is None else float(val)
     
     @property
     def urine_processor_state(self) -> Optional[str]:
@@ -1690,7 +1806,8 @@ class ISS:
     @property
     def urine_tank_qty(self) -> Optional[float]:
         """Urine Tank Quantity"""
-        return self._get_value("urine_tank_qty")
+        val = self._get_value("urine_tank_qty")
+        return None if val is None else float(val)
     
     @property
     def water_processor_state(self) -> Optional[str]:
@@ -1709,13 +1826,15 @@ class ISS:
     @property
     def waste_water_tank_qty(self) -> Optional[float]:
         """Waste Water Tank Quantity"""
-        return self._get_value("waste_water_tank_qty")
-    
+        val = self._get_value("waste_water_tank_qty")
+        return None if val is None else float(val)
+
     @property
     def clean_water_tank_qty(self) -> Optional[float]:
         """Clean Water Tank Quantity"""
-        return self._get_value("clean_water_tank_qty")
-    
+        val = self._get_value("clean_water_tank_qty")
+        return None if val is None else float(val)
+        
     @property
     def oxygen_generator_state(self) -> Optional[str]:
         """Oxygen Generator Assembly State"""
@@ -1726,23 +1845,27 @@ class ISS:
     @property
     def o2_production_rate(self) -> Optional[float]:
         """Oxygen Production Rate"""
-        return self._get_value("o2_production_rate")
-    
+        val = self._get_value("o2_production_rate")
+        return None if val is None else float(val)
+
     @property
     def node3_avionics_temp(self) -> Optional[float]:
         """Node 3 Avionics Temperature"""
-        return self._get_value("node3_avionics_temp")
-    
+        val = self._get_value("node3_avionics_temp")
+        return None if val is None else float(val)
+
     @property
     def node3_air_cooling_temp(self) -> Optional[float]:
         """Node 3 Air Cooling Temperature"""
-        return self._get_value("node3_air_cooling_temp")
-    
+        val = self._get_value("node3_air_cooling_temp")
+        return None if val is None else float(val)
+
     @property
     def node3_coolant_qty_1(self) -> Optional[float]:
         """Node 3 Coolant Quantity 1"""
-        return self._get_value("node3_coolant_qty_1")
-    
+        val = self._get_value("node3_coolant_qty_1")
+        return None if val is None else float(val)
+        
     @property
     def node3_ac_state(self) -> Optional[str]:
         """Node 3 Air Conditioning State"""
@@ -1753,13 +1876,14 @@ class ISS:
     @property
     def node3_coolant_qty_2(self) -> Optional[float]:
         """Node 3 Coolant Quantity 2"""
-        return self._get_value("node3_coolant_qty_2")
-    
+        val = self._get_value("node3_coolant_qty_2")
+        return None if val is None else float(val)
 
     @property
     def crewlock_pressure(self) -> Optional[float]:
         """Crew Lock Atmospheric Pressure"""
-        return self._get_value("crewlock_pressure")
+        val = self._get_value("crewlock_pressure")
+        return None if val is None else float(val)
     
     @property
     def lo_p_o2_valve_position(self) -> Optional[str]:
@@ -1785,113 +1909,134 @@ class ISS:
     @property
     def airlock_pressure(self) -> Optional[float]:
         """Airlock Atmospheric Pressure"""
-        return self._get_value("airlock_pressure")
-    
+        val = self._get_value("airlock_pressure")
+        return None if val is None else float(val)
+
     @property
     def airlock_hi_p_o2_pressure(self) -> Optional[float]:
         """Airlock High Pressure Oxygen Pressure"""
-        return self._get_value("airlock_hi_p_o2_pressure")
-    
+        val = self._get_value("airlock_hi_p_o2_pressure")
+        return None if val is None else float(val)
+
     @property
     def airlock_lo_p_o2_pressure(self) -> Optional[float]:
         """Airlock Low Pressure Oxygen Pressure"""
-        return self._get_value("airlock_lo_p_o2_pressure")
-    
+        val = self._get_value("airlock_lo_p_o2_pressure")
+        return None if val is None else float(val)
+
     @property
     def airlock_n2_pressure(self) -> Optional[float]:
         """Airlock Nitrogen Pressure"""
-        return self._get_value("airlock_n2_pressure")
-    
+        val = self._get_value("airlock_n2_pressure")
+        return None if val is None else float(val)
 
     @property
     def emu_1_voltage(self) -> Optional[float]:
         """Extravehicular Mobility Unit 1 Voltage"""
-        return self._get_value("emu_1_voltage")
-    
+        val = self._get_value("emu_1_voltage")
+        return None if val is None else float(val)
+
     @property
     def emu_1_current(self) -> Optional[float]:
         """Extravehicular Mobility Unit 1 Current"""
-        return self._get_value("emu_1_current")
-    
+        val = self._get_value("emu_1_current")
+        return None if val is None else float(val)
+
     @property
     def emu_2_voltage(self) -> Optional[float]:
         """Extravehicular Mobility Unit 2 Voltage"""
-        return self._get_value("emu_2_voltage")
-    
+        val = self._get_value("emu_2_voltage")
+        return None if val is None else float(val)
+
     @property
     def emu_2_current(self) -> Optional[float]:
         """Extravehicular Mobility Unit 2 Current"""
-        return self._get_value("emu_2_current")
-    
+        val = self._get_value("emu_2_current")
+        return None if val is None else float(val)
+
     @property
     def iru_voltage(self) -> Optional[float]:
         """Interface Relay Unit Voltage"""
-        return self._get_value("iru_voltage")
-    
+        val = self._get_value("iru_voltage")
+        return None if val is None else float(val)
+
     @property
     def iru_current(self) -> Optional[float]:
         """Interface Relay Unit Current"""
-        return self._get_value("iru_current")
-    
+        val = self._get_value("iru_current")
+        return None if val is None else float(val)
+
     @property
     def eva_emu_1_voltage(self) -> Optional[float]:
         """EVA Extravehicular Mobility Unit 1 Voltage"""
-        return self._get_value("eva_emu_1_voltage")
-    
+        val = self._get_value("eva_emu_1_voltage")
+        return None if val is None else float(val)
+
     @property
     def eva_emu_1_current(self) -> Optional[float]:
         """EVA Extravehicular Mobility Unit 1 Current"""
-        return self._get_value("eva_emu_1_current")
-    
+        val = self._get_value("eva_emu_1_current")
+        return None if val is None else float(val)
+
     @property
     def eva_emu_2_voltage(self) -> Optional[float]:
         """EVA Extravehicular Mobility Unit 2 Voltage"""
-        return self._get_value("eva_emu_2_voltage")
-    
+        val = self._get_value("eva_emu_2_voltage")
+        return None if val is None else float(val)
+
     @property
     def eva_emu_2_current(self) -> Optional[float]:
         """EVA Extravehicular Mobility Unit 2 Current"""
-        return self._get_value("eva_emu_2_current")
-    
+        val = self._get_value("eva_emu_2_current")
+        return None if val is None else float(val)
+
     @property
     def bca_1_voltage(self) -> Optional[float]:
         """Battery Charger Assembly 1 Voltage"""
-        return self._get_value("bca_1_voltage")
-    
+        val = self._get_value("bca_1_voltage")
+        return None if val is None else float(val)
+
     @property
     def bca_1_current(self) -> Optional[float]:
         """Battery Charger Assembly 1 Current"""
-        return self._get_value("bca_1_current")
-    
+        val = self._get_value("bca_1_current")
+        return None if val is None else float(val)
+
     @property
     def bca_2_voltage(self) -> Optional[float]:
         """Battery Charger Assembly 2 Voltage"""
-        return self._get_value("bca_2_voltage")
-    
+        val = self._get_value("bca_2_voltage")
+        return None if val is None else float(val)
+
     @property
     def bca_2_current(self) -> Optional[float]:
         """Battery Charger Assembly 2 Current"""
-        return self._get_value("bca_2_current")
-    
+        val = self._get_value("bca_2_current")
+        return None if val is None else float(val)
+
     @property
     def bca_3_voltage(self) -> Optional[float]:
         """Battery Charger Assembly 3 Voltage"""
-        return self._get_value("bca_3_voltage")
-    
+        val = self._get_value("bca_3_voltage")
+        return None if val is None else float(val)
+
     @property
     def bca_3_current(self) -> Optional[float]:
         """Battery Charger Assembly 3 Current"""
-        return self._get_value("bca_3_current")
-    
+        val = self._get_value("bca_3_current")
+        return None if val is None else float(val)
+
     @property
     def bca_4_voltage(self) -> Optional[float]:
         """Battery Charger Assembly 4 Voltage"""
-        return self._get_value("bca_4_voltage")
-    
+        val = self._get_value("bca_4_voltage")
+        return None if val is None else float(val)
+
     @property
     def bca_4_current(self) -> Optional[float]:
         """Battery Charger Assembly 4 Current"""
-        return self._get_value("bca_4_current")
+        val = self._get_value("bca_4_current")
+        return None if val is None else float(val)
     
     @property
     def bca_1_status(self) -> Optional[str]:
@@ -2027,7 +2172,8 @@ class ISS:
     @property
     def depressurization_pump_voltage(self) -> Optional[float]:
         """Depressurization Pump Voltage"""
-        return self._get_value("depressurization_pump_voltage")
+        val = self._get_value("depressurization_pump_voltage")
+        return None if val is None else float(val)
     
     @property
     def depressurization_pump_switch(self) -> Optional[str]:
@@ -2040,7 +2186,8 @@ class ISS:
     @property
     def mss_mt_position(self) -> Optional[float]:
         """Mobile Servicing System Mobile Transporter Position"""
-        return self._get_value("mss_mt_position")
+        val = self._get_value("mss_mt_position")
+        return None if val is None else float(val)
     
     @property
     def ssrms_base_location(self) -> Optional[str]:
@@ -2063,37 +2210,45 @@ class ISS:
     @property
     def ssrms_sr_joint(self) -> Optional[float]:
         """SSRMS Shoulder Roll Joint Position"""
-        return self._get_value("ssrms_sr_joint")
-    
+        val = self._get_value("ssrms_sr_joint")
+        return None if val is None else float(val)
+
     @property
     def ssrms_sy_joint(self) -> Optional[float]:
         """SSRMS Shoulder Yaw Joint Position"""
-        return self._get_value("ssrms_sy_joint")
-    
+        val = self._get_value("ssrms_sy_joint")
+        return None if val is None else float(val)
+
     @property
     def ssrms_sp_joint(self) -> Optional[float]:
         """SSRMS Shoulder Pitch Joint Position"""
-        return self._get_value("ssrms_sp_joint")
-    
+        val = self._get_value("ssrms_sp_joint")
+        return None if val is None else float(val)
+
     @property
     def ssrms_ep_joint(self) -> Optional[float]:
         """SSRMS Elbow Pitch Joint Position"""
-        return self._get_value("ssrms_ep_joint")
-    
+        val = self._get_value("ssrms_ep_joint")
+        return None if val is None else float(val)
+
     @property
     def ssrms_wp_joint(self) -> Optional[float]:
         """SSRMS Wrist Pitch Joint Position"""
-        return self._get_value("ssrms_wp_joint")
-    
+        val = self._get_value("ssrms_wp_joint")
+        return None if val is None else float(val)
+
     @property
     def ssrms_wy_joint(self) -> Optional[float]:
         """SSRMS Wrist Yaw Joint Position"""
-        return self._get_value("ssrms_wy_joint")
+        val = self._get_value("ssrms_wy_joint")
+        return None if val is None else float(val)
+
     
     @property
     def ssrms_wr_joint(self) -> Optional[float]:
         """SSRMS Wrist Roll Joint Position"""
-        return self._get_value("ssrms_wr_joint")
+        val = self._get_value("ssrms_wr_joint")
+        return None if val is None else float(val)
     
     @property
     def ssrms_tip_lee_status(self) -> Optional[str]:
@@ -2117,37 +2272,44 @@ class ISS:
     @property
     def spdm_1_sr_joint(self) -> Optional[float]:
         """SPDM Arm 1 Shoulder Roll Joint Position"""
-        return self._get_value("spdm_1_sr_joint")
-    
+        val = self._get_value("spdm_1_sr_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_1_sy_joint(self) -> Optional[float]:
         """SPDM Arm 1 Shoulder Yaw Joint Position"""
-        return self._get_value("spdm_1_sy_joint")
-    
+        val = self._get_value("spdm_1_sy_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_1_sp_joint(self) -> Optional[float]:
         """SPDM Arm 1 Shoulder Pitch Joint Position"""
-        return self._get_value("spdm_1_sp_joint")
-    
+        val = self._get_value("spdm_1_sp_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_1_ep_joint(self) -> Optional[float]:
         """SPDM Arm 1 Elbow Pitch Joint Position"""
-        return self._get_value("spdm_1_ep_joint")
-    
+        val = self._get_value("spdm_1_ep_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_1_wp_joint(self) -> Optional[float]:
         """SPDM Arm 1 Wrist Pitch Joint Position"""
-        return self._get_value("spdm_1_wp_joint")
-    
+        val = self._get_value("spdm_1_wp_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_1_wy_joint(self) -> Optional[float]:
         """SPDM Arm 1 Wrist Yaw Joint Position"""
-        return self._get_value("spdm_1_wy_joint")
-    
+        val = self._get_value("spdm_1_wy_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_1_wr_joint(self) -> Optional[float]:
         """SPDM Arm 1 Wrist Roll Joint Position"""
-        return self._get_value("spdm_1_wr_joint")
+        val = self._get_value("spdm_1_wr_joint")
+        return None if val is None else float(val)
     
     @property
     def spdm_1_otcm_status(self) -> Optional[str]:
@@ -2159,37 +2321,44 @@ class ISS:
     @property
     def spdm_2_sr_joint(self) -> Optional[float]:
         """SPDM Arm 2 Shoulder Roll Joint Position"""
-        return self._get_value("spdm_2_sr_joint")
-    
+        val = self._get_value("spdm_2_sr_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_2_sy_joint(self) -> Optional[float]:
         """SPDM Arm 2 Shoulder Yaw Joint Position"""
-        return self._get_value("spdm_2_sy_joint")
-    
+        val = self._get_value("spdm_2_sy_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_2_sp_joint(self) -> Optional[float]:
         """SPDM Arm 2 Shoulder Pitch Joint Position"""
-        return self._get_value("spdm_2_sp_joint")
-    
+        val = self._get_value("spdm_2_sp_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_2_ep_joint(self) -> Optional[float]:
         """SPDM Arm 2 Elbow Pitch Joint Position"""
-        return self._get_value("spdm_2_ep_joint")
-    
+        val = self._get_value("spdm_2_ep_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_2_wp_joint(self) -> Optional[float]:
         """SPDM Arm 2 Wrist Pitch Joint Position"""
-        return self._get_value("spdm_2_wp_joint")
-    
+        val = self._get_value("spdm_2_wp_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_2_wy_joint(self) -> Optional[float]:
         """SPDM Arm 2 Wrist Yaw Joint Position"""
-        return self._get_value("spdm_2_wy_joint")
-    
+        val = self._get_value("spdm_2_wy_joint")
+        return None if val is None else float(val)
+
     @property
     def spdm_2_wr_joint(self) -> Optional[float]:
         """SPDM Arm 2 Wrist Roll Joint Position"""
-        return self._get_value("spdm_2_wr_joint")
+        val = self._get_value("spdm_2_wr_joint")
+        return None if val is None else float(val)
     
     @property
     def spdm_2_otcm_status(self) -> Optional[str]:
@@ -2201,7 +2370,8 @@ class ISS:
     @property
     def spdm_body_roll_joint(self) -> Optional[float]:
         """SPDM Body Roll Joint Position"""
-        return self._get_value("spdm_body_roll_joint")
+        val = self._get_value("spdm_body_roll_joint")
+        return None if val is None else float(val)
     
     @property
     def spdm_body_status(self) -> Optional[str]:
@@ -2225,136 +2395,160 @@ class ISS:
         mapping = {0: "Released", 1: "Captive", 2: "Captured"}
         return self._decode_status(value, mapping)
     
-
     @property
     def russian_station_mode(self) -> Optional[str]:
         """Russian Segment Station Mode"""
-        return self._get_value("russian_station_mode")
-    
+        val = self._get_value("russian_station_mode")
+        return None if val is None else str(val)
+
     @property
     def kurs_equipment_1(self) -> Optional[str]:
         """Kurs Rendezvous Equipment 1 Status"""
-        return self._get_value("kurs_equipment_1")
-    
+        val = self._get_value("kurs_equipment_1")
+        return None if val is None else str(val)
+
     @property
     def kurs_equipment_2(self) -> Optional[str]:
         """Kurs Rendezvous Equipment 2 Status"""
-        return self._get_value("kurs_equipment_2")
-    
+        val = self._get_value("kurs_equipment_2")
+        return None if val is None else str(val)
+
     @property
     def kurs_p1_p2_failure(self) -> Optional[bool]:
         """Kurs P1/P2 Channel Failure Status"""
-        return self._get_value("kurs_p1_p2_failure")
-    
+        val = self._get_value("kurs_p1_p2_failure")
+        return None if val is None else bool(val)
+
     @property
     def kurs_range(self) -> Optional[float]:
         """Kurs Target Range (meters)"""
-        return self._get_value("kurs_range")
-    
+        val = self._get_value("kurs_range")
+        return None if val is None else float(val)
+
     @property
     def kurs_range_rate(self) -> Optional[float]:
         """Kurs Target Range Rate (m/s)"""
-        return self._get_value("kurs_range_rate")
-    
+        val = self._get_value("kurs_range_rate")
+        return None if val is None else float(val)
+
     @property
     def kurs_test_mode(self) -> Optional[bool]:
         """Kurs Test Mode Status"""
-        return self._get_value("kurs_test_mode")
-    
+        val = self._get_value("kurs_test_mode")
+        return None if val is None else bool(val)
+
     @property
     def kurs_capture_signal(self) -> Optional[bool]:
         """Kurs Capture Signal Status"""
-        return self._get_value("kurs_capture_signal")
-    
+        val = self._get_value("kurs_capture_signal")
+        return None if val is None else bool(val)
+
     @property
     def kurs_target_acquisition(self) -> Optional[bool]:
         """Kurs Target Acquisition Status"""
-        return self._get_value("kurs_target_acquisition")
-    
+        val = self._get_value("kurs_target_acquisition")
+        return None if val is None else bool(val)
+
     @property
     def kurs_functional_mode(self) -> Optional[bool]:
         """Kurs Functional Mode Status"""
-        return self._get_value("kurs_functional_mode")
-    
+        val = self._get_value("kurs_functional_mode")
+        return None if val is None else bool(val)
+
     @property
     def kurs_standby_mode(self) -> Optional[bool]:
         """Kurs Standby Mode Status"""
-        return self._get_value("kurs_standby_mode")
-    
+        val = self._get_value("kurs_standby_mode")
+        return None if val is None else bool(val)
+
     @property
     def sm_docking_flag(self) -> Optional[bool]:
         """Service Module Docking Flag"""
-        return self._get_value("sm_docking_flag")
-    
+        val = self._get_value("sm_docking_flag")
+        return None if val is None else bool(val)
+
     @property
     def sm_forward_dock_engaged(self) -> Optional[bool]:
         """Service Module Forward Docking Port Engaged"""
-        return self._get_value("sm_forward_dock_engaged")
-    
+        val = self._get_value("sm_forward_dock_engaged")
+        return None if val is None else bool(val)
+
     @property
     def sm_aft_dock_engaged(self) -> Optional[bool]:
         """Service Module Aft Docking Port Engaged"""
-        return self._get_value("sm_aft_dock_engaged")
-    
+        val = self._get_value("sm_aft_dock_engaged")
+        return None if val is None else bool(val)
+
     @property
     def sm_nadir_dock_engaged(self) -> Optional[bool]:
         """Service Module Nadir Docking Port Engaged"""
-        return self._get_value("sm_nadir_dock_engaged")
-    
+        val = self._get_value("sm_nadir_dock_engaged")
+        return None if val is None else bool(val)
+
     @property
     def fgb_nadir_dock_engaged(self) -> Optional[bool]:
         """Functional Cargo Block Nadir Docking Port Engaged"""
-        return self._get_value("fgb_nadir_dock_engaged")
-    
+        val = self._get_value("fgb_nadir_dock_engaged")
+        return None if val is None else bool(val)
+
     @property
     def sm_nadir_udm_dock_engaged(self) -> Optional[bool]:
         """Service Module Nadir Universal Docking Module Port Engaged"""
-        return self._get_value("sm_nadir_udm_dock_engaged")
-    
+        val = self._get_value("sm_nadir_udm_dock_engaged")
+        return None if val is None else bool(val)
+
     @property
     def mrm1_dock_engaged(self) -> Optional[bool]:
         """Mini Research Module 1 Docking Port Engaged"""
-        return self._get_value("mrm1_dock_engaged")
-    
+        val = self._get_value("mrm1_dock_engaged")
+        return None if val is None else bool(val)
+
     @property
     def mrm2_dock_engaged(self) -> Optional[bool]:
         """Mini Research Module 2 Docking Port Engaged"""
-        return self._get_value("mrm2_dock_engaged")
-    
+        val = self._get_value("mrm2_dock_engaged")
+        return None if val is None else bool(val)
+
     @property
     def sm_hooks_closed(self) -> Optional[bool]:
         """Service Module Docking Hooks Closed"""
-        return self._get_value("sm_hooks_closed")
-    
+        val = self._get_value("sm_hooks_closed")
+        return None if val is None else bool(val)
+
     @property
     def russian_attitude_mode(self) -> Optional[str]:
         """Russian Segment Attitude Control Mode"""
-        return self._get_value("russian_attitude_mode")
-    
+        val = self._get_value("russian_attitude_mode")
+        return None if val is None else str(val)
+
     @property
     def russian_motion_control(self) -> Optional[str]:
         """Russian Segment Motion Control Mode"""
-        return self._get_value("russian_motion_control")
-    
+        val = self._get_value("russian_motion_control")
+        return None if val is None else str(val)
+
     @property
     def russian_free_drift_prep(self) -> Optional[bool]:
         """Russian Segment Free Drift Preparation"""
-        return self._get_value("russian_free_drift_prep")
-    
+        val = self._get_value("russian_free_drift_prep")
+        return None if val is None else bool(val)
+
     @property
     def russian_thruster_terminated(self) -> Optional[bool]:
         """Russian Segment Thruster Terminated Status"""
-        return self._get_value("russian_thruster_terminated")
-    
+        val = self._get_value("russian_thruster_terminated")
+        return None if val is None else bool(val)
+
     @property
     def russian_dynamic_mode(self) -> Optional[bool]:
         """Russian Segment Dynamic Mode Status"""
-        return self._get_value("russian_dynamic_mode")
-    
+        val = self._get_value("russian_dynamic_mode")
+        return None if val is None else bool(val)
 
     @property
     def year(self) -> Optional[int]:
         """Current Year"""
-        return self._get_value("year")
+        val = self._get_value("year")
+        return None if val is None else int(val)
     
 
