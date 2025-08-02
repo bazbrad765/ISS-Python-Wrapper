@@ -12,32 +12,49 @@ pip install lightstreamer-client-lib
 
 # Initialize and connect
 iss = ISS()
+
 iss.connect()
+
 time.sleep(2) - this is needed toi allow time to connect
 
 # Get basic telemetry
 print("=== ISS Basic Status ===")
+
 print(f"GMT Time: {iss.gmt_time}")
+
 print(f"Cabin Pressure: {iss.cabin_pressure}")
+
 print(f"Cabin Temperature: {iss.cabin_temperature}")
+
 print(f"Solar Beta Angle: {iss.solar_beta_angle}")
 
 # Get attitude information
 print("\n=== Attitude Control ===")
+
 print(f"CMGs Online: {iss.cmgs_online_count}")
+
 print(f"CMG 1 Status: {iss.cmg_1_online}")
+
 print(f"Attitude Roll Error: {iss.attitude_roll_error}")
+
 
 # Get position data
 print("\n=== Position ===")
+
 print(f"X Position: {iss.state_vector_x_pos} meters")
+
 print(f"Y Position: {iss.state_vector_y_pos} meters")
+
 print(f"Z Position: {iss.state_vector_z_pos} meters")
+
 
 # Get environmental data
 print("\n=== Environmental ===")
+
 print(f"Lab O2 Pressure: {iss.lab_ppo2}")
+
 print(f"Lab N2 Pressure: {iss.lab_ppn2}")
+
 print(f"Lab CO2 Pressure: {iss.lab_ppco2}")
 
 
