@@ -26,7 +26,7 @@ ul = iss.urine_tank_qty
 print(cp,ul)
 
 
-# Get basic telemetry
+# Example print statements
 
 print(f"GMT Time: {iss.gmt_time}")
 
@@ -36,25 +36,17 @@ print(f"Cabin Temperature: {iss.cabin_temperature}")
 
 print(f"Solar Beta Angle: {iss.solar_beta_angle}")
 
-# Get attitude information
-
 print(f"CMGs Online: {iss.cmgs_online_count}")
 
 print(f"CMG 1 Status: {iss.cmg_1_online}")
 
 print(f"Attitude Roll Error: {iss.attitude_roll_error}")
 
-
-# Get position data
-
 print(f"X Position: {iss.state_vector_x_pos} meters")
 
 print(f"Y Position: {iss.state_vector_y_pos} meters")
 
 print(f"Z Position: {iss.state_vector_z_pos} meters")
-
-
-# Get environmental data
 
 print(f"Lab O2 Pressure: {iss.lab_ppo2}")
 
