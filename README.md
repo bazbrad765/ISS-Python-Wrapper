@@ -12,7 +12,6 @@ pip install lightstreamer-client-lib
 
 # Initialize and connect
 iss = ISS()
-
 iss.connect()
 time.sleep(2) - this is needed toi allow time to connect
 
