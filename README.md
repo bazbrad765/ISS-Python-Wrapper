@@ -11,7 +11,7 @@ pip install lightstreamer-client-lib
 ## Example Usage
 
 # Initialize and connect
-iss = ISS()
+iss = ISS() \n
 iss.connect()
 time.sleep(2) - this is needed toi allow time to connect
 
@@ -52,13 +52,6 @@ print(f"Lab CO2 Pressure: {iss.lab_ppco2}")
 
 ## Available Properties
 
-### Basic Properties
-| Property | Return Type | Description |
-|----------|-------------|-------------|
-| `iss.waste_water_tank` | `Optional[float]` | Waste Water Tank Quantity |
-| `iss.gmt_time` | `Optional[str]` | Greenwich Mean Time |
-| `iss.cabin_pressure` | `Optional[str]` | Cabin Atmospheric Pressure |
-| `iss.hi_p_o2_valve_position` | `Optional[str]` | High Pressure Oxygen Valve Position |
 
 ### Control Moment Gyroscope (CMG) - Attitude Control
 | Property | Return Type | Description |
@@ -138,6 +131,7 @@ print(f"Lab CO2 Pressure: {iss.lab_ppco2}")
 | `iss.lab_coolant_lt` | `Optional[float]` | Lab Coolant Loop Temperature (Low) |
 | `iss.lab_coolant_mt` | `Optional[float]` | Lab Coolant Loop Temperature (Medium) |
 | `iss.cabin_temperature` | `Optional[float]` | Cabin Temperature |
+| `iss.cabin_pressure` | `Optional[str]` | Cabin Atmospheric Pressure |
 | `iss.lab_avionics_temp` | `Optional[float]` | Lab Avionics Temperature |
 | `iss.lab_air_cooling_temp` | `Optional[float]` | Lab Air Cooling Temperature |
 | `iss.vacuum_resource_valve` | `Optional[str]` | Vacuum Resource Valve Position |
@@ -332,6 +326,7 @@ print(f"Lab CO2 Pressure: {iss.lab_ppco2}")
 | `iss.water_processor_state` | `Optional[str]` | Water Processor Assembly State |
 | `iss.water_processor_step` | `Optional[str]` | Water Processor Assembly Processing Step |
 | `iss.waste_water_tank_qty` | `Optional[float]` | Waste Water Tank Quantity |
+
 | `iss.clean_water_tank_qty` | `Optional[float]` | Clean Water Tank Quantity |
 | `iss.oxygen_generator_state` | `Optional[str]` | Oxygen Generator Assembly State |
 | `iss.o2_production_rate` | `Optional[float]` | Oxygen Production Rate |
@@ -346,6 +341,7 @@ print(f"Lab CO2 Pressure: {iss.lab_ppco2}")
 |----------|-------------|-------------|
 | `iss.crewlock_pressure` | `Optional[float]` | Crew Lock Atmospheric Pressure |
 | `iss.lo_p_o2_valve_position` | `Optional[str]` | Low Pressure Oxygen Valve Position |
+| `iss.hi_p_o2_valve_position` | `Optional[str]` | High Pressure Oxygen Valve Position |
 | `iss.n2_supply_valve_position` | `Optional[str]` | Nitrogen Supply Valve Position |
 | `iss.airlock_ac_state` | `Optional[str]` | Airlock Air Conditioning State |
 | `iss.airlock_pressure` | `Optional[float]` | Airlock Atmospheric Pressure |
@@ -468,4 +464,4 @@ print(f"Lab CO2 Pressure: {iss.lab_ppco2}")
 | Property | Return Type | Description |
 |----------|-------------|-------------|
 | `iss.year` | `Optional[int]` | Current Year |
-
+| `iss.gmt_time` | `Optional[str]` | Greenwich Mean Time |
