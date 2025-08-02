@@ -20,7 +20,10 @@ time.sleep(2) - this is needed toi allow time to connect
 - set objects to the node values.
 
 cp = iss.cabin_pressure
+
 ul = iss.urine_tank_qty
+
+print(cp,ul)
 
 
 # Get basic telemetry
