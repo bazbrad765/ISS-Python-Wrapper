@@ -1,9 +1,25 @@
 from typing import Optional, Dict
 from lightstreamer.client import LightstreamerClient, Subscription, ItemUpdate
 from lightstreamer.client import SubscriptionListener
-import time
+import requests
+from enum import Enum
 
-class ISSListener(SubscriptionListener):
+
+class ISSStatusUpdater:
+    def __init__(self):
+        self.status = "DISCONNECTED"
+
+    def onStatusChange(self,status):
+        self.status = status
+        print(f"Connection Status: {self.status}")
+        if status == "CONNECTED:WS-STREAMING" or status == "CONNECTED:HTTP-STREAMING":
+            ISS.is_connected = True
+        else:
+            ISS.is_connected = False
+    
+
+
+class ISSNodeUpdateListener:
     def __init__(self,data_store):
         self.data = data_store
 
@@ -15,13 +31,14 @@ class ISSListener(SubscriptionListener):
         self.data[item] = value
         #print(self.data)
 
+
 class ISS:
     """a wrapper to get the live nodes from the ISS lightstreamer"""
-
+    is_connected = False
     def __init__(self):
         self._data = {}
         self._client = None
-        self._connected = False
+
         self._iss_telemetry_nodes = {
 
     # Control Moment Gyroscope (CMG) - Attitude Control
@@ -384,6 +401,8 @@ class ISS:
     'gmt_time': 'TIME_000001',
     'year': 'TIME_000002'
 }
+    
+
 
     def _decode_status(self, value, mapping):
         """decode the index to the map"""
@@ -393,10 +412,11 @@ class ISS:
             return mapping.get(int(value))
         except (ValueError, TypeError):
             return str(value)
+        
+    
      
     def connect(self):
         self._client = LightstreamerClient("https://push.lightstreamer.com", "ISSLIVE")
-        time.sleep(1)
 
         #sub = Subscription("MERGE",["item1","item2","item3"],["stock_name","last_price"])
 
@@ -406,11 +426,11 @@ class ISS:
             fields=['Value'])
 
 
-        sub.addListener(ISSListener(self._data))
-        self._client.subscribe(sub)
-        self._client.connect()
-        self._connected = True
+        sub.addListener(ISSNodeUpdateListener(self._data))
+        self._client.addListener(ISSStatusUpdater())
 
+        self._client.connect()
+        self._client.subscribe(sub)
 
     def _get_value(self, name: str):
         if name in self._iss_telemetry_nodes:
@@ -422,6 +442,9 @@ class ISS:
 
     def get_node(self,name:str):
         return self._get_value(name)
+    
+    def get_dets(self):
+        return self._client.connectionDetails
     
     
         
