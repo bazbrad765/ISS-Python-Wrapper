@@ -1,8 +1,6 @@
 from typing import Optional, Dict
 from lightstreamer.client import LightstreamerClient, Subscription, ItemUpdate
 from lightstreamer.client import SubscriptionListener
-import requests
-from enum import Enum
 
 
 class ISSStatusUpdater:
