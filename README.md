@@ -342,7 +342,6 @@ print(f"Lab CO2 Pressure: {iss.lab_ppco2}")
 | `iss.water_processor_state` | `Optional[str]` | Water Processor Assembly State |
 | `iss.water_processor_step` | `Optional[str]` | Water Processor Assembly Processing Step |
 | `iss.waste_water_tank_qty` | `Optional[float]` | Waste Water Tank Quantity |
-
 | `iss.clean_water_tank_qty` | `Optional[float]` | Clean Water Tank Quantity |
 | `iss.oxygen_generator_state` | `Optional[str]` | Oxygen Generator Assembly State |
 | `iss.o2_production_rate` | `Optional[float]` | Oxygen Production Rate |
